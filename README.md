@@ -61,10 +61,10 @@ O projeto foi construído com foco em **boas práticas de engenharia de software
 │         (intercepta e valida o token JWT)               │
 └──────────────────────────┬──────────────────────────────┘
                            │
-┌──────────────────────────▼──────────────────────────────┐
-│                     Controller                          │
-│     AuthController │ PortfolioController │ AssetController │ StockPriceController
-└──────────────────────────┬──────────────────────────────┘
+┌──────────────────────────▼────────────────────────────────────────────────────────┐
+│                     Controller                                                    │
+│     AuthController │ PortfolioController │ AssetController │ StockPriceController │
+└──────────────────────────┬────────────────────────────────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────┐
 │                      Service                            │
