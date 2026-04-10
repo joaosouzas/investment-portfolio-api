@@ -1,0 +1,50 @@
+# =============================================================================
+# INVESTMENT PORTFOLIO API — Docker Compose
+# =============================================================================
+# Sobe o PostgreSQL para desenvolvimento local.
+#
+# Como usar:
+#   docker compose up -d          → sobe o banco em background
+#   docker compose down           → para e remove o container
+#   docker compose down -v        → para, remove container e volumes (apaga dados)
+#   docker compose logs -f        → acompanha os logs em tempo real
+# =============================================================================
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: portfolio-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB:       ${DB_NAME:-portfolio_db}
+      POSTGRES_USER:     ${DB_USERNAME:-portfolio_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      # Persiste os dados entre reinicializações do container
+      - postgres_data:/var/lib/postgresql/data
+      # Roda o script de setup inicial ao criar o banco pela primeira vez
+      - ./scripts/setup-db.sql:/docker-entrypoint-initdb.d/setup-db.sql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-portfolio_user} -d ${DB_NAME:-portfolio_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: portfolio_postgres_data
