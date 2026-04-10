@@ -68,17 +68,17 @@ O projeto foi construído com foco em **boas práticas de engenharia de software
                            │
 ┌──────────────────────────▼──────────────────────────────┐
 │                      Service                            │
-│     AuthService │ PortfolioService │ StockPriceService   │
+│     AuthService │ PortfolioService │ StockPriceService  │
 └────────────┬─────────────────────────────┬──────────────┘
              │                             │
 ┌────────────▼───────────┐   ┌─────────────▼──────────────┐
-│      Repository        │   │      AlphaVantageClient     │
-│  (Spring Data JPA)     │   │      (OpenFeign)            │
+│      Repository        │   │      AlphaVantageClient    │
+│  (Spring Data JPA)     │   │      (OpenFeign)           │
 └────────────┬───────────┘   └─────────────┬──────────────┘
              │                             │
 ┌────────────▼───────────┐   ┌─────────────▼──────────────┐
-│     PostgreSQL 16      │   │    Alpha Vantage API        │
-│   (banco de dados)     │   │    (cotações em tempo real) │
+│     PostgreSQL 16      │   │    Alpha Vantage API       │
+│   (banco de dados)     │   │    (cotações em tempo real)│
 └────────────────────────┘   └────────────────────────────┘
 ```
 
